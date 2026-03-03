@@ -12,3 +12,5 @@ st.write(
     "- **Methods**: Key details about our data and limitations to our analysis.\n"
 )
 st.info("Datasets: `PL-season-2324.csv`, `PL-season-2425.csv`")
+
+df, team_summary, melted = load_data() st.header("Q1: Team Performance Across Seasons") st.altair_chart(chart_q1(team_summary), use_container_width=True) st.header("Q2: Rolling Attacking Metrics") st.altair_chart(chart_q2(melted), use_container_width=True) st.header("Q4: Extreme Match Outcomes") col1, col2 = st.columns([2, 1]) with col1: st.altair_chart(chart_q4_scatter(df), use_container_width=True) with col2: st.altair_chart(chart_q4_table(df), use_container_width=True)
