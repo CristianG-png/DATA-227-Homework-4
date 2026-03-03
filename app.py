@@ -1,5 +1,4 @@
 import streamlit as st
-st.set_option("server.fileWatcherType", "none")
 from data_loader import load_data
 from charts.chart import chart_q1, chart_q2, chart_q4_scatter, chart_q4_table
 from PIL import Image
