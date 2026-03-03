@@ -11,5 +11,4 @@ team_summary = df.groupby(["Season", "Team"], as_index=False).agg({
     "GD": "sum"
 })
 
-# call the chart function
 st.altair_chart(chart_q1(team_summary), use_container_width=True)
