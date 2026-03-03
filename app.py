@@ -7,17 +7,13 @@ st.set_page_config(page_title="Analysis of Weather Patterns in Seattle:", layout
 
 st.title("Looking at Soccer teams performance between two recent seasons")
 st.write("This website is made to satisfy the criteria for Homework 4 of DATA 22700, using visualizations and data used from Homework 3.\n")
-st.write(
-    "To see the narrative data story, navigate through the pages in the sidebar:\n"
-    "- **Story**: The central narrative\n"
-    "- **Explore**: For a closer reader-driven exploration of the data.\n"
-    "- **Methods**: Key details about our data and limitations to our analysis.\n"
-)
+
 st.info("Datasets: `PL-season-2324.csv`, `PL-season-2425.csv`")
 
 df, team_summary, melted = load_data() 
 
-st.header("Q1: Team Performance Across Seasons") 
+st.header("Team Performance Across Seasons") 
+st.caption("First, comparing how teams performed across the two seasons is important to see if a team improved or got worse over time.")
 st.altair_chart(chart_q1(team_summary), use_container_width=True) 
 
 st.header("Q2: Rolling Attacking Metrics") 
