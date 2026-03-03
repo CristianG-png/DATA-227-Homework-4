@@ -1,5 +1,7 @@
 import streamlit as st
 from PIL import Image
+import pandas as pd
+from charts import chart_q1
 
 st.set_page_config(page_title="Analysis of Weather Patterns in Seattle:", layout="wide")
 
@@ -12,3 +14,14 @@ st.write(
     "- **Methods**: We lay down some key details about our data and limitations to our analysis.\n"
 )
 st.info("Dataset: `vega_datasets.data.seattle_weather()`")
+
+df = pd.read_csv("data/yourfile.csv")
+team_summary = df.groupby(["Season", "Team"], as_index=False).agg({
+    "Points": "sum",
+    "GoalsFor": "sum",
+    "GoalsAgainst": "sum",
+    "GD": "sum"
+})
+
+# call the chart function
+st.altair_chart(chart_q1(team_summary), use_container_width=True)
