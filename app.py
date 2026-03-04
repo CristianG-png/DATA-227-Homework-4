@@ -27,7 +27,7 @@ with col2:
 st.caption("We can see some interesting stats here but I'll just focus on Arsenal's performance. We see that they had fluctuating performance the 2023-24 season, but still ended with them earning the most points in the 2023-24 season. In contrast, in 2024-25, they performed well early in the year but did much worse later, leading to them seeing a massive point loss")
 
 st.header("Extreme Match Outcomes")
-st.caption("
+st.caption("")
 col1, col2 = st.columns(2) 
 with col1: 
     st.altair_chart(chart_q4_scatter(df), use_container_width=True) 
