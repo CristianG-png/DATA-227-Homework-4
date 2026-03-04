@@ -84,9 +84,6 @@ def load_data():
         .transform(lambda s: s.rolling(3, min_periods=1).mean())
     )
 
-    # -----------------------------
-    # Q1 team_summary (HW3 In[6])
-    # -----------------------------
     team_summary = (
         team_df.groupby(["Season", "Team"], as_index=False)
         .agg({
