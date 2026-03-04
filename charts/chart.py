@@ -28,7 +28,7 @@ def chart_q1(team_summary):
         )
         .add_params(team_select, season_select)
         .properties(
-            title="Q1: Team Performance Across Seasons"
+            title="Team Performance Across Seasons"
         )
     )
     return chart
@@ -58,7 +58,7 @@ def chart_q2_single_season(melted, season):
         )
         .transform_filter(metric_select)
         .add_params(metric_select, hover_team)
-        .properties(title=f"Q2: Attacking Performance — {season}")
+        .properties(title=f"Attacking Performance — {season}")
     )
 
     return chart
@@ -76,7 +76,7 @@ def chart_q4_scatter(df):
             tooltip=["Date", "HomeTeam", "AwayTeam", "FTHG", "FTAG", "FTR"]
         )
         .add_params(brush_extremes)
-        .properties(title="Q4: Extreme Match Outcomes")
+        .properties(title="Extreme Match Outcomes")
     )
     return chart
 
