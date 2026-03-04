@@ -33,44 +33,35 @@ def chart_q1(team_summary):
     )
     return chart
 
-def chart_q2(melted):
-    metric_options = sorted(melted["metric"].unique())
-    season_options = sorted(melted["Season"].unique())
+def chart_q2_single_season(melted, season):
+    season_df = melted[melted["Season"] == season]
 
-    season_select = alt.selection_point(
-        fields=["Season"],
-        bind=alt.binding_select(options=season_options),
-        value=season_options[0]   # safe default
-    )
-
+    metric_options = sorted(season_df["metric"].unique())
     metric_select = alt.selection_point(
         fields=["metric"],
         bind=alt.binding_select(options=metric_options),
-        value=metric_options[0]   # safe default
+        value=metric_options[0]
     )
 
     hover_team = alt.selection_point(fields=["Team"], on="mouseover", empty="none")
 
     chart = (
-    alt.Chart(melted)
-    .mark_line()
-    .encode(
-        x=alt.X("Matchweek:Q"),
-        y=alt.Y("value:Q", title="Rolling Average"),
-        color="Team:N",
-        opacity=alt.condition(hover_team, alt.value(1), alt.value(0.15)),
-        strokeWidth=alt.condition(hover_team, alt.value(3), alt.value(1)),
-        tooltip=["Team", "Season", "Matchweek", "value"]
+        alt.Chart(season_df)
+        .mark_line()
+        .encode(
+            x="Matchweek:Q",
+            y=alt.Y("value:Q", title="Rolling Average"),
+            color="Team:N",
+            opacity=alt.condition(hover_team, alt.value(1), alt.value(0.15)),
+            strokeWidth=alt.condition(hover_team, alt.value(3), alt.value(1)),
+            tooltip=["Team", "Season", "Matchweek", "value"]
+        )
+        .transform_filter(metric_select)
+        .add_params(metric_select, hover_team)
+        .properties(title=f"Q2: Attacking Performance — {season}")
     )
-    .transform_filter(season_select)
-    .transform_filter(metric_select)
-    .add_params(metric_select, hover_team)   # ← FIXED
-    .properties(title="Q2: Attacking Performance Over Time")
-)
-
 
     return chart
-
     
 def chart_q4_scatter(df):
     brush_extremes = alt.selection_interval()
