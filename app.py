@@ -17,8 +17,12 @@ st.caption("First, comparing how teams performed across the two seasons is impor
 st.altair_chart(chart_q1(team_summary), use_container_width=True) 
 st.caption("Excluding the teams who only played for one of the two seasons, the improvement here varies. Teams like Nott'm Forest, Brentford, and Brighton saw massive improvement over previous seasons while teams such as Arsenal and Man City saw massive loss in the total points they earned in their most recent season.")
 
-st.header("Rolling Attacking Metrics") 
-st.altair_chart(chart_q2(melted), use_container_width=True) 
+st.header("Rolling Attacking Metrics")
+col1, col2 = st.columns(2)
+with col1:
+    st.altair_chart(chart_q2_single_season(melted, "2023-24"), use_container_width=True)
+with col2:
+    st.altair_chart(chart_q2_single_season(melted, "2024-25"), use_container_width=True)
 
 st.header("Extreme Match Outcomes") 
 col1, col2 = st.columns([2, 1]) 
