@@ -11,7 +11,6 @@ st.write("This website is made to satisfy the criteria for Homework 4 of DATA 22
 st.info("Datasets: `PL-season-2324.csv`, `PL-season-2425.csv`")
 
 df, team_summary, melted = load_data() 
-st.write(melted["metric"].unique())
 
 st.header("Team Performance Across Seasons") 
 st.caption("First, comparing how teams performed across the two seasons is important to see if a team improved or got worse over time.")
@@ -20,6 +19,8 @@ st.caption("Excluding the teams who only played for one of the two seasons, the 
 
 st.header("Q2: Rolling Attacking Metrics") 
 st.altair_chart(chart_q2(melted), use_container_width=True) 
+st.write("Q2 melted shape:", melted.shape)
+st.write("Q2 chart object:", chart_q2(melted))
 
 st.header("Q4: Extreme Match Outcomes") 
 col1, col2 = st.columns([2, 1]) 
