@@ -15,6 +15,7 @@ df, team_summary, melted = load_data()
 st.header("Team Performance Across Seasons") 
 st.caption("First, comparing how teams performed across the two seasons is important to see if a team improved or got worse over time.")
 st.altair_chart(chart_q1(team_summary), use_container_width=True) 
+st.caption("Excluding the teams who only played for one of the two seasons, the improvement here varies. Teams like Nott'm Forest, Brentford, and Brighton saw massive improvement over previous seasons while teams such as Arsenal and Man City saw massive loss in the total points they earned in their most recent season.")
 
 st.header("Q2: Rolling Attacking Metrics") 
 st.altair_chart(chart_q2(melted), use_container_width=True) 
