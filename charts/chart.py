@@ -34,7 +34,6 @@ def chart_q1(team_summary):
     return chart
 
 def chart_q2(melted):
-    # Dynamically read valid options from the data
     metric_options = sorted(melted["metric"].unique())
     season_options = sorted(melted["Season"].unique())
 
@@ -53,21 +52,22 @@ def chart_q2(melted):
     hover_team = alt.selection_point(fields=["Team"], on="mouseover", empty="none")
 
     chart = (
-        alt.Chart(melted)
-        .mark_line()
-        .encode(
-            x=alt.X("Matchweek:Q"),
-            y=alt.Y("value:Q", title="Rolling Average"),
-            color="Team:N",
-            opacity=alt.condition(hover_team, alt.value(1), alt.value(0.15)),
-            strokeWidth=alt.condition(hover_team, alt.value(3), alt.value(1)),
-            tooltip=["Team", "Season", "Matchweek", "value"]
-        )
-        .transform_filter(season_select)
-        .transform_filter(metric_select)
-        .add_params(season_select, metric_select, hover_team)
-        .properties(title="Q2: Attacking Performance Over Time")
+    alt.Chart(melted)
+    .mark_line()
+    .encode(
+        x=alt.X("Matchweek:Q"),
+        y=alt.Y("value:Q", title="Rolling Average"),
+        color="Team:N",
+        opacity=alt.condition(hover_team, alt.value(1), alt.value(0.15)),
+        strokeWidth=alt.condition(hover_team, alt.value(3), alt.value(1)),
+        tooltip=["Team", "Season", "Matchweek", "value"]
     )
+    .transform_filter(season_select)
+    .transform_filter(metric_select)
+    .add_params(metric_select, hover_team)   # ← FIXED
+    .properties(title="Q2: Attacking Performance Over Time")
+)
+
 
     return chart
 
