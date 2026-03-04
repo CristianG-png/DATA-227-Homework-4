@@ -9,6 +9,7 @@ st.title("Looking at Soccer teams performance between two recent seasons")
 st.write("This website is made to satisfy the criteria for Homework 4 of DATA 22700, using visualizations and data used from Homework 3.\n")
 
 st.info("Datasets: `PL-season-2324.csv`, `PL-season-2425.csv`")
+st.write(melted["metric"].unique())
 
 df, team_summary, melted = load_data() 
 
