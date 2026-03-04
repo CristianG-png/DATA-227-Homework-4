@@ -1,4 +1,3 @@
-# charts.py
 import altair as alt
 
 alt.data_transformers.disable_max_rows()
@@ -35,22 +34,22 @@ def chart_q1(team_summary):
     return chart
 
 def chart_q2(melted):
+    # Dynamically read valid options from the data
+    metric_options = sorted(melted["metric"].unique())
+    season_options = sorted(melted["Season"].unique())
+
     season_select = alt.selection_point(
         fields=["Season"],
-        bind=alt.binding_select(options=["2023-24", "2024-25"])
+        bind=alt.binding_select(options=season_options),
+        value=season_options[0]   # safe default
     )
+
     metric_select = alt.selection_point(
         fields=["metric"],
-        bind=alt.binding_select(
-            options=[
-                "GoalsFor_roll",
-                "Shots_roll",
-                "ShotsOnTarget_roll",
-                "Corners_roll"
-            ]
-        ),
-        value="GoalsFor_roll"
+        bind=alt.binding_select(options=metric_options),
+        value=metric_options[0]   # safe default
     )
+
     hover_team = alt.selection_point(fields=["Team"], on="mouseover", empty="none")
 
     chart = (
@@ -59,17 +58,19 @@ def chart_q2(melted):
         .encode(
             x=alt.X("Matchweek:Q"),
             y=alt.Y("value:Q", title="Rolling Average"),
-            color=alt.Color("Team:N"),
+            color="Team:N",
             opacity=alt.condition(hover_team, alt.value(1), alt.value(0.15)),
             strokeWidth=alt.condition(hover_team, alt.value(3), alt.value(1)),
             tooltip=["Team", "Season", "Matchweek", "value"]
         )
         .transform_filter(season_select)
         .transform_filter(metric_select)
-        .add_params(metric_select, hover_team)
+        .add_params(season_select, metric_select, hover_team)
         .properties(title="Q2: Attacking Performance Over Time")
     )
+
     return chart
+
     
 def chart_q4_scatter(df):
     brush_extremes = alt.selection_interval()
