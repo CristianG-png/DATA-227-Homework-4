@@ -19,8 +19,7 @@ st.caption("Excluding the teams who only played for one of the two seasons, the 
 
 st.header("Q2: Rolling Attacking Metrics") 
 st.altair_chart(chart_q2(melted), use_container_width=True) 
-st.write("Q2 melted shape:", melted.shape)
-st.write("Q2 chart object:", chart_q2(melted))
+st.write(melted.head())
 
 st.header("Q4: Extreme Match Outcomes") 
 col1, col2 = st.columns([2, 1]) 
