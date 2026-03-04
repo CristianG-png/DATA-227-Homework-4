@@ -27,9 +27,10 @@ with col2:
 st.caption("We can see some interesting stats here but I'll just focus on Arsenal's performance. We see that they had fluctuating performance the 2023-24 season, but still ended with them earning the most points in the 2023-24 season. In contrast, in 2024-25, they performed well early in the year but did much worse later, leading to them seeing a massive point loss")
 
 st.header("Extreme Match Outcomes")
-st.caption("")
+st.caption("To help finalize the research on team performance, seeing how even or uneven matches turn out to be can be very helpful in seeing if a team's performance against each other is consistently good, bad, or even")
 col1, col2 = st.columns(2) 
 with col1: 
     st.altair_chart(chart_q4_scatter(df), use_container_width=True) 
 with col2: 
     st.altair_chart(chart_q4_table(df), use_container_width=True)
+st.caption("If you look at the table used for the visual, you can look deeply into what each outcome of matches were. You can also hover over the points to see highlighted matches, such as Sheffield United vs Newcastle which ended up being very one-sided. When you look back at the first visualization, we see that Newcastle was one of the better teams, while Sheffield United didn't get many points by comparison, showing that even low performing teams can still dominate against specific teams. This sort of data can give us an indicator for what teams have the most potential in the future")
